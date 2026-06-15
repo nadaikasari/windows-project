@@ -1,0 +1,462 @@
+:root {
+    color: #20242a;
+    background: #f5f7fb;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+.explorer-shell {
+    display: grid;
+    grid-template-columns: minmax(220px, 26vw) 1fr;
+    height: 100vh;
+    min-height: 560px;
+    overflow: hidden;
+}
+
+.tree-panel,
+.content-panel {
+    min-width: 0;
+    overflow: auto;
+}
+
+.tree-panel {
+    border-right: 1px solid #cfd6e2;
+    background: #fbfcff;
+    padding: 16px 10px;
+}
+
+.content-panel {
+    background: #ffffff;
+    padding: 20px 22px;
+}
+
+.panel-header,
+.content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.label {
+    margin: 0 0 3px;
+    color: #687386;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+h1,
+h2 {
+    margin: 0;
+    color: #151922;
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.toolbar-actions {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 6px;
+}
+
+.icon-button {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border: 1px solid #c8d1df;
+    border-radius: 6px;
+    color: #263244;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.icon-button:hover {
+    background: #eef4ff;
+}
+
+.icon-button img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.search-box {
+    display: grid;
+    margin-bottom: 12px;
+    color: #596579;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.search-input-wrap {
+    position: relative;
+    display: block;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 11px;
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
+    opacity: 0.58;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.search-box input {
+    width: 100%;
+    border: 1px solid #c8d1df;
+    border-radius: 6px;
+    padding: 9px 10px 9px 34px;
+    color: #1d2634;
+    background: #ffffff;
+    outline: none;
+}
+
+.search-box input:focus {
+    border-color: #2d6cdf;
+    box-shadow: 0 0 0 3px rgba(45, 108, 223, 0.14);
+}
+
+.folder-tree,
+.tree-children {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tree-children {
+    margin-left: 14px;
+    border-left: 1px solid #e2e7f0;
+}
+
+.tree-empty-space {
+    min-height: 120px;
+}
+
+.tree-row {
+    display: grid;
+    grid-template-columns: 28px 20px minmax(0, 1fr);
+    align-items: center;
+    min-height: 32px;
+    border-radius: 6px;
+    padding: 2px 6px 2px 1px;
+    color: #202937;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tree-row:hover {
+    background: #eef4ff;
+}
+
+.tree-row.selected {
+    color: #0c3c8c;
+    background: #dbeafe;
+}
+
+.toggle-button {
+    display: grid;
+    width: 26px;
+    height: 26px;
+    place-items: center;
+    border: 0;
+    border-radius: 4px;
+    color: #536176;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.toggle-button:not(:disabled):hover {
+    color: #1f4f9f;
+    background: #dbeafe;
+}
+
+.toggle-button:disabled {
+    cursor: default;
+}
+
+.toggle-button img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    opacity: 0.72;
+}
+
+.folder-icon,
+.item-folder-icon,
+.item-file-icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.folder-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(132px, 160px));
+    align-items: start;
+    gap: 26px 34px;
+    padding-top: 12px;
+}
+
+.explorer-item {
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: 12px;
+    min-height: 138px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 10px 8px;
+    color: #1e2735;
+    background: #ffffff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.explorer-item:hover {
+    border-color: #c8d7ef;
+    background: #f2f7ff;
+}
+
+.explorer-item span:last-child {
+    display: -webkit-box;
+    overflow: hidden;
+    max-width: 136px;
+    line-height: 1.25;
+    -webkit-box-orient: vertical;
+    overflow-wrap: anywhere;
+}
+
+.explorer-item .item-folder-icon {
+    width: 96px;
+    height: 78px;
+}
+
+.explorer-item .item-file-icon {
+    width: 72px;
+    height: 78px;
+}
+
+.empty-state,
+.tree-status {
+    display: grid;
+    min-height: 220px;
+    place-items: center;
+    border: 1px dashed #cdd6e4;
+    border-radius: 8px;
+    color: #6a7484;
+    background: #f8fafd;
+    text-align: center;
+}
+
+.empty-state.inline {
+    grid-column: 1 / -1;
+    min-height: 220px;
+    border: 0;
+    background: transparent;
+    color: #6a7484;
+}
+
+.error-message {
+    margin: 0 0 12px;
+    border: 1px solid #efb8b8;
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: #9f1d1d;
+    background: #fff1f1;
+    font-size: 14px;
+}
+
+.context-menu {
+    position: fixed;
+    z-index: 20;
+    display: grid;
+    width: 170px;
+    border: 1px solid #c4ccda;
+    border-radius: 6px;
+    padding: 4px;
+    background: #ffffff;
+    box-shadow: 0 14px 36px rgba(22, 31, 47, 0.18);
+}
+
+.context-menu button {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+    min-height: 34px;
+    border: 0;
+    border-radius: 4px;
+    padding: 0 10px;
+    color: #202937;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+}
+
+.context-menu button img {
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
+}
+
+.context-menu button:hover {
+    background: #eef4ff;
+}
+
+.context-menu button.danger {
+    color: #a61b1b;
+}
+
+.context-menu button.danger:hover {
+    background: #fff0f0;
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    display: grid;
+    place-items: center;
+    padding: 18px;
+    background: rgba(20, 28, 41, 0.34);
+}
+
+.dialog {
+    display: grid;
+    gap: 14px;
+    width: min(420px, 100%);
+    border: 1px solid #c9d2df;
+    border-radius: 8px;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 22px 60px rgba(13, 22, 36, 0.22);
+}
+
+.dialog p {
+    margin: 0;
+    color: #5d6878;
+    line-height: 1.5;
+}
+
+.dialog label {
+    display: grid;
+    gap: 7px;
+    color: #465365;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.dialog input {
+    width: 100%;
+    border: 1px solid #c8d1df;
+    border-radius: 6px;
+    padding: 10px 11px;
+    color: #1d2634;
+    outline: none;
+}
+
+.dialog input:focus {
+    border-color: #2d6cdf;
+    box-shadow: 0 0 0 3px rgba(45, 108, 223, 0.14);
+}
+
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.dialog-actions button {
+    min-width: 82px;
+    min-height: 36px;
+    border: 1px solid #c8d1df;
+    border-radius: 6px;
+    padding: 0 14px;
+    color: #263244;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.dialog-actions button:hover {
+    background: #f3f6fb;
+}
+
+.dialog-actions button:disabled {
+    color: #9aa5b5;
+    cursor: not-allowed;
+}
+
+.dialog-actions button.primary {
+    border-color: #1f5ec8;
+    color: #ffffff;
+    background: #2d6cdf;
+}
+
+.dialog-actions button.primary:hover {
+    background: #245fc8;
+}
+
+.dialog-actions button.danger {
+    border-color: #bb2d2d;
+    color: #ffffff;
+    background: #c93636;
+}
+
+.dialog-actions button.danger:hover {
+    background: #ad2828;
+}
+
+@media (max-width: 760px) {
+    .explorer-shell {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(280px, 42vh) 1fr;
+    }
+
+    .tree-panel {
+        border-right: 0;
+        border-bottom: 1px solid #cfd6e2;
+    }
+
+    .content-panel {
+        padding: 16px;
+    }
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
